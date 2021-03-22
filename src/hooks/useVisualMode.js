@@ -14,7 +14,7 @@ export default function useVisualMode (m) {
   const back = function () {
 
     let mde;
-    if (history.length == 1) {
+    if (history.length === 1) {
       mde = history[0];
     }
     setHistory(p => [...p].slice(0, -1));
