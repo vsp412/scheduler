@@ -51,16 +51,16 @@ export default function Application(props) {
   
   const appointMap = dailyAppointments.map(a => {
 
-      //const interview = getInterview(state, a.interview);
+      const interview = getInterview(state, a.interview);
       console.log(a)
-      console.log("*************************************************")
+      
 
       return (
         <Appointment 
         key = {a.id} 
         id = {a.id}
         time = {a.time} 
-        interview = {a.interview}
+        interview = {interview}
         />
       );
   });
