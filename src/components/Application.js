@@ -9,12 +9,7 @@ import Appointment from "components/Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 
-
-
-
 export default function Application(props) {
-
-
 
 
   const [state, setState] = useState({
@@ -50,12 +45,36 @@ export default function Application(props) {
   console.log(state.interviewers);
 
  
-  
+  const bookInterview = function (id, interview) {
+   console.log(id, interview);
+   console.log("@@@@@@@@@@@@@@@@@@");
+
+   const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview }
+   };
+  //  console.log(appointment);
+  //  console.log(state);
+  //  console.log(interview);
+
+   const appointments = {
+    ...state.appointments,
+    [id]: appointment
+   };
+
+   setState({
+    ...state,
+    appointments
+   });
+
+
+  }
+
   const appointMap = dailyAppointments.map(a => {
 
       const interview = getInterview(state, a.interview);
       console.log(a)
-      
+      console.log("Ooooooooooooooooooooooooooooooo");
 
       return (
         <Appointment 
@@ -64,13 +83,12 @@ export default function Application(props) {
         time = {a.time} 
         interview = {interview}
         interviewers = {dailyInterviewers}
+        bookInterview = {bookInterview}
         />
       );
   });
 
-  const bookInterview = function (id, interview) {
-    console.log(id, interview);
-  }
+  
 
   return (
     <main className="layout">
@@ -92,7 +110,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {appointMap}
-        <Appointment key="last" time="5pm" bookInterview = {bookInterview} />
+        <Appointment key="last" time="5pm"  />
       </section>
     </main>
     

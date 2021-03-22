@@ -24,7 +24,10 @@ export function getInterview(state, interview) {
 
    const stud = interview.student;
    const ID = interview.interviewer;
-   const intName = state.interviewers[ID.toString()].name;
+   console.log(state)
+   console.log(ID)
+   console.log("XXxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+   const intName = state.interviewers[ID].name;
    const av = state.interviewers[interview.interviewer].avatar;
    const int = {id : ID, name : intName, avatar : av}
    const op = {
