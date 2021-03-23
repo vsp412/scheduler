@@ -10,6 +10,10 @@ export default function useApplicationData () {
     interviewers: {}
     
   });
+
+  const remSpots = function (state, appointments) {
+    
+  }
   
   const setDay = day => setState({ ...state, day });
 
@@ -25,7 +29,10 @@ export default function useApplicationData () {
     [id]: appointment
    };
 
-
+   //code to update no of spots
+   const daysSave = [ ...state.days ];
+   daysSave.forEach(d => d.appointments.includes(id) ? d.spots-- : d.spots);
+   
    return axios.put(`/api/appointments/${id}`, {interview})
    .then(res => {
      setState({
@@ -33,6 +40,9 @@ export default function useApplicationData () {
       appointments
      });
    })
+   
+
+
   }
 
   const cancelInterview = function (id) {
@@ -47,6 +57,10 @@ export default function useApplicationData () {
       ...state.appointments,
       [id]: appointment
     };
+
+    //code to update no of spots
+    const daysDel = [ ...state.days ];
+    daysDel.forEach(d => d.appointments.includes(id) ? d.spots++ : d.spots);
 
     return axios.delete(`/api/appointments/${id}`)
     .then(res => {
