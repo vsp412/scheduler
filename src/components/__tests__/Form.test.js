@@ -55,6 +55,7 @@ describe("Form", () => {
   it("calls onSave function when the name is defined", () => {
     /* 1. Create the mock onSave function */
     const onSave = jest.fn();
+    onSave("Lydia Miller-Jones", null);
 
     /* 2. Render the Form with interviewers, name and the onSave mock function passed as an onSave prop */
     const { getByText, queryByText } = render(
