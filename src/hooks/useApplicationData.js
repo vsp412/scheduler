@@ -11,9 +11,7 @@ export default function useApplicationData () {
     
   });
 
-  const remSpots = function (state, appointments) {
-    
-  }
+ 
   
   const setDay = day => setState({ ...state, day });
 
