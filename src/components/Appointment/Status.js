@@ -3,7 +3,7 @@ import "components/Appointment/styles.scss"
 
 export default function Status (props) {
   return (
-    <main className = "appointment__card--status">
+    <main className = "appointment__card--status" >
       
           
          <img

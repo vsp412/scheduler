@@ -19,8 +19,6 @@ describe("Form", () => {
     }
   ];
   
-
-  
   it("renders without student name if not provided", () => {
     const { getByPlaceholderText } = render(
       <Form interviewers={interviewers} />
@@ -69,7 +67,7 @@ describe("Form", () => {
     });
   
     fireEvent.click(getByText("Save"));
-    onSave("Lydia Miller-Jones", null);
+    //onSave("Lydia Miller-Jones", null);
   
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
   
@@ -104,8 +102,7 @@ describe("Form", () => {
   
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
-  
-  
+
 
 
 });

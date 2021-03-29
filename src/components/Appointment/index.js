@@ -46,7 +46,7 @@ export default function Appointment (props) {
 
 
   return(
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       
       <Header time = {props.time} />
       
@@ -68,7 +68,7 @@ export default function Appointment (props) {
 
       {mode === CREATE && 
         (<Form interviewers = {props.interviewers} 
-         onCancel = {() => back()} onSave = {save} />
+         onCancel = {() => back()} onSave = {save}  />
         )
       }
 
@@ -86,4 +86,3 @@ export default function Appointment (props) {
     </article>
   )
 }
-//{/* {props.interview ? <Show student = {props.interview.student} interviewer = {props.interview.interviewer}/> : <Empty />} */}

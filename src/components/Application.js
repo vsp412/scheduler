@@ -21,10 +21,11 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  const dailyInterviewers = getInterviewersForDay(state, state.day);
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
+  
 
-  const appointMap = dailyAppointments.map(a => {
+  const appointMap = appointments.map(a => {
 
       const interview = getInterview(state, a.interview);
       
@@ -35,7 +36,7 @@ export default function Application(props) {
         id = {a.id}
         time = {a.time} 
         interview = {interview}
-        interviewers = {dailyInterviewers}
+        interviewers = {interviewers}
         bookInterview = {bookInterview}
         cancelInterview = {cancelInterview}
         />
@@ -63,8 +64,10 @@ export default function Application(props) {
            
       </section>
       <section className="schedule">
-        {appointMap}
-        <Appointment key="last" time="5pm"  />
+        
+            {appointMap}
+            <Appointment key="last" time="5pm"  />
+              
       </section>
     </main>
     

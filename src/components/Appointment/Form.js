@@ -31,13 +31,14 @@ export default function Form (props) {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
-    }
+    } 
+      
+    // if (interviewer === null) {
+    //   setInterviewer(1)
+    // }
+      
+
     setError("");
-    if (interviewer === null) {
-      setErrorInt("An interviewer must be selected");
-      return;
-    }
-    setErrorInt("");
     props.onSave(name, interviewer);
   }
   return (
