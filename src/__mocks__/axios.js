@@ -1,3 +1,4 @@
+//mock data for testing purposes for Jest 
 const fixtures = {
   days: [
     {
@@ -53,8 +54,8 @@ const fixtures = {
   }
 };
 
-export default {
-  
+//mocked REST API functions for jest
+export default {  
   get: jest.fn(url => {
     if (url === "/api/days") {
       return Promise.resolve({
@@ -64,14 +65,12 @@ export default {
       });
     }
 
-    if (url === "/api/appointments") {
-      
+    if (url === "/api/appointments") { 
       return Promise.resolve({
         status: 200,
         statusText: "OK",
         data: fixtures.appointments
       })
-
     }
 
     if (url === "/api/interviewers") {

@@ -1,20 +1,12 @@
 import React, { Fragment } from 'react'
-
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-
-
 import "index.scss";
-
-
 import Button from "components/Button";
-
 import DayListItem from "components/dayListItem";
 import DayList from "components/DayList";
-
 import InterviewerListItem from "components/interviewerListItem";
 import InterviewerList from "components/InterviewerList";
-
 import Appointment from "components/Appointment";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
@@ -23,8 +15,6 @@ import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
 import Form from "components/Appointment/Form";
-import { act } from "@testing-library/react";
-
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]

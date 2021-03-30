@@ -1,27 +1,20 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
-
 export default function useApplicationData () {
-  
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
-    
   });
-
- 
-  
   const setDay = day => setState({ ...state, day });
 
+  //handles the booking/updation of an appointment/interview
   const bookInterview = function (id, interview) {
-
    const appointment = {
     ...state.appointments[id],
     interview: { ...interview }
    };
-
    const appointments = {
     ...state.appointments,
     [id]: appointment
@@ -30,7 +23,6 @@ export default function useApplicationData () {
    //code to update no of spots
    const daysSave = [ ...state.days ];
    daysSave.forEach(d => d.appointments.includes(id) ? d.spots-- : d.spots);
-   
    return axios.put(`/api/appointments/${id}`, {interview})
    .then(res => {
      setState({
@@ -38,19 +30,14 @@ export default function useApplicationData () {
       appointments
      });
    })
-   
-
-
   }
 
+  //handles fxn to cancel an interview/appointment
   const cancelInterview = function (id) {
-    
-
     const appointment = {
       ...state.appointments[id],
       interview: null
-    };
-  
+    }; 
     const appointments = {
       ...state.appointments,
       [id]: appointment
@@ -59,7 +46,6 @@ export default function useApplicationData () {
     //code to update no of spots
     const daysDel = [ ...state.days ];
     daysDel.forEach(d => d.appointments.includes(id) ? d.spots++ : d.spots);
-
     return axios.delete(`/api/appointments/${id}`)
     .then(res => {
      setState({
@@ -67,9 +53,9 @@ export default function useApplicationData () {
       appointments
      });
     })
-  
   }
 
+  //set initial state with data responses from REST API calls
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -85,10 +71,6 @@ export default function useApplicationData () {
         })
       )
     })
-   
   }, []);
-
   return {state, setDay, bookInterview, cancelInterview};
-
-
 }

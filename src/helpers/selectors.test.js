@@ -1,5 +1,5 @@
+//sample data for test purposes
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-
 const state = {
   days: [
     {
@@ -13,7 +13,6 @@ const state = {
       name: "Tuesday",
       appointments: [4, 5],
       interviewers: [1, 2, 3]
-
     }
   ],
   appointments: {

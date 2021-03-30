@@ -1,9 +1,7 @@
-@import "styles/variables.scss";
-@import "styles/mixins.scss";
-@import "styles/animations.scss";
-
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
+@import 'styles/animations.scss';
 $appointment-height: 11rem;
-
 .appointment {
   &__add {
     min-height: $appointment-height;
@@ -11,10 +9,8 @@ $appointment-height: 11rem;
     display: flex;
     justify-content: center;
     align-items: center;
-
     &-button {
       @include button-inactive--opacity;
-
       &:hover {
         @include button-active--opacity;
       }
@@ -86,7 +82,6 @@ $appointment-height: 11rem;
 
     &--confirm {
       @include border-card($danger-color);
-
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -95,7 +90,6 @@ $appointment-height: 11rem;
 
     &--error {
       @include border-card($error-color);
-
       display: flex;
       justify-content: space-between;
       align-items: center;
