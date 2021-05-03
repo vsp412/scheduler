@@ -23,8 +23,8 @@ export default function useApplicationData () {
     } else if (action.type === 'SET_INTERVIEW') {
   
     } else if (action.type === 'SET_APPLICATION_DATA') {
-      console.log("plplplplplplppl")
-  //return state + action.days + action.appointments + action.interviewers
+      
+  
       return {...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers}
 
   
@@ -59,11 +59,11 @@ export default function useApplicationData () {
       axios.get('/api/interviewers')
     ]).then((all) => {
      
-      console.log(all)
+     
       let days = all[0].data
       let appointments  = all[1].data 
       let interviewers = all[2].data
-      console.log(days)
+      
       dispatch({ type: SET_APPLICATION_DATA, days: days, appointments: appointments, interviewers: interviewers });
     })
   }, []);
