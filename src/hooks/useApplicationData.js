@@ -12,36 +12,64 @@ export default function useApplicationData () {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: {},
   })
-
 
   function reducer(state, action) {
     if (action.type === 'SET_DAY') {
       return { ...state, day: action.day }
   
     } else if (action.type === 'SET_INTERVIEW') {
+      
+
+
+      const appointment = {
+        ...state.appointments[action.id],
+        interview: { ...action.interview }
+      };
+
+    
+      const appo = {
+        ...state.appointments,
+        [action.id]: appointment
+      };
+      
+      return {...state, appointments: appo}
   
     } else if (action.type === 'SET_APPLICATION_DATA') {
       
-  
+      
       return {...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers}
-
+      
   
-    } else {
+    }
+
+    
+    else {
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
       );
     }     
   }
   
+  //handles selecting different days
   const setDay = function (day) {
     dispatch({ type: SET_DAY, day: day })
   }
 
   //handles the booking/updation of an appointment/interview
   const bookInterview = function (id, interview) {
-      dispatch({ type: SET_INTERVIEW, id: id, interview: interview });
+    
+    
+    return axios.put(`/api/appointments/${id}`, {interview: interview})
+    .then((res) => {
+
+           //updates spots
+           setAppData()
+           dispatch({ type: SET_INTERVIEW, id: id, interview: interview });
+      
+    })
+     
   }
   
   //handles fxn to cancel an interview/appointment
@@ -49,16 +77,12 @@ export default function useApplicationData () {
       dispatch({ type: SET_INTERVIEW, id: id, interview: null });
   }
    
-
-  //set initial state with data responses from REST API calls
-  useEffect(() => {
-    console.log("ASdadas")
+  function setAppData() {
     Promise.all([
       axios.get('/api/days'),
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then((all) => {
-     
      
       let days = all[0].data
       let appointments  = all[1].data 
@@ -66,7 +90,12 @@ export default function useApplicationData () {
       
       dispatch({ type: SET_APPLICATION_DATA, days: days, appointments: appointments, interviewers: interviewers });
     })
+  }
+  //set initial state with data responses from REST API calls
+  useEffect(() => {
+    setAppData()
   }, []);
+
 
   return {state, setDay, bookInterview, cancelInterview}
 
@@ -80,10 +109,10 @@ export default function useApplicationData () {
 // import axios from "axios";
 // export default function useApplicationData () {
 //   const [state, setState] = useState({
-    // day: "Monday",
-    // days: [],
-    // appointments: {},
-    // interviewers: {}
+//     day: "Monday",
+//     days: [],
+//     appointments: {},
+//     interviewers: {}
 //   });
 
 
