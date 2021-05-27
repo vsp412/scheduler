@@ -1,11 +1,14 @@
 import {useState, useEffect, useReducer} from "react";
 import axios from "axios";
+
+
 export default function useApplicationData () {
   console.log("lalalalasdcaala")
 
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
+  
 
 
   const [state, dispatch] = useReducer(reducer, {
@@ -100,7 +103,15 @@ export default function useApplicationData () {
   }
   //set initial state with data responses from REST API calls
   useEffect(() => {
-    setAppData()
+    setAppData();
+    const {REACT_APP_WEBSOCKET_URL} = process.env
+    const conn = new WebSocket(REACT_APP_WEBSOCKET_URL, "json");
+    conn.onopen = function (event) {
+      conn.send("ping");
+    };
+    
+    
+    
   }, []);
 
 
