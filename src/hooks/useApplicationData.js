@@ -20,31 +20,31 @@ export default function useApplicationData () {
       return { ...state, day: action.day }
   
     } else if (action.type === 'SET_INTERVIEW') {
+      let appointment;
+      if (action.dom === 'deleting') {
+        appointment = {
+          ...state.appointments[action.id],
+          interview: null
+        };
+      } else {
+          appointment = {
+            ...state.appointments[action.id],
+            interview: { ...action.interview }
+          };
+      }    
       
-
-
-      const appointment = {
-        ...state.appointments[action.id],
-        interview: { ...action.interview }
-      };
-
-    
       const appo = {
         ...state.appointments,
         [action.id]: appointment
       };
       
       return {...state, appointments: appo}
-  
+
     } else if (action.type === 'SET_APPLICATION_DATA') {
-      
-      
       return {...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers}
-      
-  
+    
     }
 
-    
     else {
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -66,7 +66,7 @@ export default function useApplicationData () {
 
            //updates spots
            setAppData()
-           dispatch({ type: SET_INTERVIEW, id: id, interview: interview });
+           dispatch({ type: SET_INTERVIEW, id: id, interview: interview, dom: 'booking' });
       
     })
      
@@ -74,7 +74,14 @@ export default function useApplicationData () {
   
   //handles fxn to cancel an interview/appointment
   const cancelInterview = function (id) {
-      dispatch({ type: SET_INTERVIEW, id: id, interview: null });
+
+    return axios.delete(`/api/appointments/${id}`)
+    .then((res) => {
+      //updates spots
+      setAppData()
+      dispatch({ type: SET_INTERVIEW, id: id, interview: null, dom: 'deleting' });
+    })
+      
   }
    
   function setAppData() {
