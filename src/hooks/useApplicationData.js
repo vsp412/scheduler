@@ -23,6 +23,7 @@ export default function useApplicationData () {
       return { ...state, day: action.day }
   
     } else if (action.type === 'SET_INTERVIEW') {
+      
       let appointment;
       if (action.dom === 'deleting') {
         appointment = {
@@ -40,7 +41,7 @@ export default function useApplicationData () {
         ...state.appointments,
         [action.id]: appointment
       };
-      
+       
       return {...state, appointments: appo}
 
     } else if (action.type === 'SET_APPLICATION_DATA') {
@@ -107,11 +108,30 @@ export default function useApplicationData () {
     const {REACT_APP_WEBSOCKET_URL} = process.env
     const conn = new WebSocket(REACT_APP_WEBSOCKET_URL, "json");
     conn.onopen = function (event) {
-      conn.send("ping");
-    };
-    
-    
-    
+      setAppData()
+     
+      //conn.send()
+    }; 
+
+    conn.onmessage = function(event) {
+      setAppData()
+      let eventData = JSON.parse(event.data)
+      console.log(eventData)
+     
+      if (eventData.type === 'SET_INTERVIEW') {
+       
+        if(eventData.interview === null) {
+          setAppData()
+          dispatch({ type: SET_INTERVIEW, id: eventData.id, interview: null, dom: 'deleting' });
+        } else {
+          
+          setAppData()
+          dispatch({ type: SET_INTERVIEW, id: eventData.id, interview: eventData.interview, dom: 'booking' });
+        }
+      }
+      
+    }
+
   }, []);
 
 
