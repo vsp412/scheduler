@@ -1,6 +1,6 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import DayListItem from "components/DayListItem";
+import DayListItem from "components/dayListItem";
 afterEach(cleanup);
 
 //Unit tests for daylistitem component
