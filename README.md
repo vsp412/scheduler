@@ -2,12 +2,14 @@
 
 ## About
 
-Hello dear viewer! This is is a full-stack application made with React and Node. It allows students to schedule interviews with interviewers, cancel their interviews, or edit their existing interviews. This app works as the client, while the [scheduler-api](https://github.com/vsp412/scheduler-api) acts as the server, it contains seed data which creates a PostgreSQL database and populates it with random data forming 3 tables.
+Hello dear viewer! This is is a full-stack application made with React and Node. It allows many students to interact with the application at the same time by making use of WebSockets, including allowing them to schedule interviews with interviewers, cancel their interviews, or edit their existing interviews. This app works as the client, while the [scheduler-api](https://github.com/vsp412/scheduler-api) acts as the server, it contains seed data which creates a PostgreSQL database and populates it with random data forming 3 tables.
 Follow the instructions in the [scheduler-api README.md file](https://github.com/vsp412/scheduler-api/blob/master/README.md) in order to setup the server for running this app.
 
 ## How it looks
 
 !["Main UI of the app"](https://github.com/vsp412/scheduler/blob/master/docs/general_ui.png)
+
+!["WebSockets Demo"](https://github.com/vsp412/scheduler/blob/master/docs/websockets.gif)
 
 !["Creating an appointment"](https://github.com/vsp412/scheduler/blob/master/docs/create.png)
 
